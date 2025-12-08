@@ -1,7 +1,13 @@
+import React, { FunctionComponent } from "react";
 import  style  from "./style.module.css"
-import avatar from '../../img/avatar.png';
+import { User } from "../../types";
+import defaultAvatar from "../../img/defaultAvatar.png"
 
-function Header() {
+
+const Header: FunctionComponent<User> = ({avatar}): React.JSX.Element => {
+  if(!avatar) {
+      avatar = defaultAvatar
+  } 
   return (
     <div className={style.header}>
         <span className={style.header__logo}>Awesome Kanban Board</span>
