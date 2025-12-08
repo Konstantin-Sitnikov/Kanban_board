@@ -1,5 +1,6 @@
+
 import React, { FunctionComponent } from "react";
-import  style  from "./style.module.css"
+import  style  from "./style.module.scss"
 import { User } from "../../types";
 import defaultAvatar from "../../img/defaultAvatar.png"
 
