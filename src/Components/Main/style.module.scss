@@ -1,7 +1,12 @@
 @use "../var.scss";
 
 .main {
+    padding: 20px;
     width: 100%;
     height: 700px;
     background-color: var.$main-background-color;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    gap: 24px;
 }

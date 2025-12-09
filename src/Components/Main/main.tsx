@@ -1,10 +1,8 @@
-import React, { FunctionComponent } from "react";
-
 import  style  from "./style.module.scss"
-import {Items} from '../../types'
+import TaskList from "../TaskList/tasklist";
+import {Mock} from '../../types'
 
-
-const dataMock = {
+const dataMock: Mock = {
     backlog: [
         {
             title: "Задача 1",
@@ -15,33 +13,57 @@ const dataMock = {
             title: "Задача 2",
             description: "Надо еще что то сделать!!"
         },
+        ],
+    
+    ready: [
+        {
+            title: "Задача 3",
+            description: "Надо что то сделать!!"
+        },
+
+        {
+            title: "Задача 4",
+            description: "Надо еще что то сделать!!"
+        },
+        ],
+    "In Progress": [
+        {
+            title: "Задача 5",
+            description: "Надо что то сделать!!"
+        },
+
+        {
+            title: "Задача 6",
+            description: "Надо еще что то сделать!!"
+        },
+        ],
+    Finished:[
+        {
+            title: "Задача 7",
+            description: "Надо что то сделать!!"
+        },
+
+        {
+            title: "Задача 8",
+            description: "Надо еще что то сделать!!"
+        },
         ]
+
+
+
 }
 
 
-const ListItems: FunctionComponent<Items> = ({title}): React.JSX.Element => {
-    return (
-        <li>{`${title}`}</li>
-    )
-}
+ function Main() {
 
-
-function List({dataList}:any) {
-    console.log(dataList)
-    return (<ul>
-        <>
-        {dataList.map((data:any) => {
-            return (<ListItems title={data.title}/>)
-            })}
-        </>
-    </ul>)
-}
-
-
-function Main() {
     return (
         <div className={style.main}>
-            <List dataList={dataMock.backlog}/>
+            {
+                Object.entries(dataMock).map(([key, val]) => { 
+                   return (<TaskList listName={key} dataList={val}/>)
+                })
+            }
+            
         </div>
     )
 }

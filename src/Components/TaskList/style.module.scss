@@ -1,0 +1,44 @@
+@use "../var.scss";
+
+.task {
+    width: 282px;
+    background-color: var.$task-list-background-color;
+    border: none;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    padding: 12px;
+    gap: 15px;
+   }
+
+.task__titel {
+    font-family: 'Roboto';
+    font-size: 18px;
+}
+
+.task__titel::first-letter {
+    text-transform: uppercase;
+}
+
+.task__list {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    gap: 15px;
+}
+
+.task__item {
+    width: 100%;
+    padding: 7px 9px 6px 8px;
+    border: none;
+    border-radius: 5px;
+    background-color: var.$task-item-background-color;
+ 
+}
