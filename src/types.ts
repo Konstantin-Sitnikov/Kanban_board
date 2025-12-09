@@ -13,9 +13,9 @@ export type Items = {
 
 export type List = {
     listName: string,
-    dataList: any
+    dataList: any,    
 }
 
-export type Mock = {
+export type DataTask = {
     [key:string]:any
- }
+}
