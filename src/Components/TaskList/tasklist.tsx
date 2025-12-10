@@ -15,11 +15,11 @@ const TaskList: FunctionComponent<List> = ({listName, dataList}): React.JSX.Elem
     const [task, setTask] = useState(dataList)
     
     function onClick () {
-            task.push({id:10, title:"Задача 10", description:"Выполни задачу"})
-            setTask(task)
-            console.log(task)
-     }
+            setTask([...task, {id:10, title:"Задача 10", description:"Выполни задачу"}])
 
+      }
+
+    console.log("render")
    
     return (
         <div  className={style.task}>
