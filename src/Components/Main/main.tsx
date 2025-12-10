@@ -1,3 +1,4 @@
+import React, { useRef } from "react";
 import  style  from "./style.module.scss"
 import TaskList from "../TaskList/tasklist";
 import {DataTask} from '../../types'
@@ -54,9 +55,10 @@ const dataMock: DataTask = {
 
 
  function Main() {
-
+    const refMain = useRef(null)
+    console.log(refMain.current) 
     return (
-        <div className={style.main}>
+        <div ref={refMain} className={style.main}>
             {
                 Object.entries(dataMock).map(([taskName, taskDate], ind) => {
                     
