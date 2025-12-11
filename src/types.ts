@@ -13,7 +13,8 @@ export type Items = {
 
 export type List = {
     listName: string,
-    dataList: any,    
+    dataList: any,
+    onClick: any,    
 }
 
 export type DataTask = {

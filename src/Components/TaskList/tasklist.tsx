@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { FunctionComponent } from "react";
 import {Items, List} from '../../types'
 import style from './style.module.scss'
 
@@ -10,15 +10,8 @@ const TaskItems: FunctionComponent<Items> = ({title}): React.JSX.Element => {
 }
 
 
-const TaskList: FunctionComponent<List> = ({listName, dataList}): React.JSX.Element => {
+const TaskList: FunctionComponent<List> = ({listName, dataList, onClick}): React.JSX.Element => {
     
-    const [task, setTask] = useState(dataList)
-    
-    function onClick () {
-            setTask([...task, {id:10, title:"Задача 10", description:"Выполни задачу"}])
-
-      }
-
     console.log("render")
    
     return (
@@ -26,7 +19,7 @@ const TaskList: FunctionComponent<List> = ({listName, dataList}): React.JSX.Elem
             <span  className={style.task__titel}>{listName}</span>
             <ul className={style.task__list}>        
                 {
-                    task.map((data:any) => {
+                    dataList.map((data:any) => {
                         return (<TaskItems key={data.id} title={data.title}/>)
                     })
                 }    
