@@ -4,7 +4,7 @@ import TaskList from "../TaskList/tasklist";
 import {DataTask} from '../../types'
 
 
-const dataMock: DataTask = {
+/*const dataMock: DataTask = {
     backlog: [
         {   id: 1,
             title: "Задача 1",
@@ -51,7 +51,7 @@ const dataMock: DataTask = {
         },
         ]
 
-}
+}*/
 
 const backlogTask: DataTask = {
     backlog: [
@@ -89,11 +89,12 @@ const readyTask:DataTask ={
     const [backlog, setBacklog] = useState(backlogTask.backlog)
     const [ready, setReady] = useState(readyTask.ready)
         
-    function setTaskBacklog () {
-            setBacklog([...backlog, {id:10, title:"Задача 10", description:"Выполни задачу"}])
+    function setTaskBacklog(id:number, title:string) {
+            console.log(id)
+            setBacklog([...backlog, {id:id, title:title, description:"This task has no description"}])
         }
 
-    function setTaskReady () {
+    function setTaskReady() {
             setBacklog([...backlog, {id:10, title:"Задача 10", description:"Выполни задачу"}])
             setReady([...ready, {id:10, title:"Задача 10", description:"Выполни задачу"}])
         }

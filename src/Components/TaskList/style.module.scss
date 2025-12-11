@@ -43,6 +43,31 @@
     cursor: pointer;
 }
 
+.input {
+    display: none;
+}
 
 
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+    border: none;
+    cursor: pointer;
+}
 
+.button::before {
+    content: "+";
+}
+
+.button_submit {
+    width: 102px;
+    height: 29px;
+    background-color: var.$button-background-color;
+    border-radius: 5px;
+}
+
+.button_submit::before {
+    content: "";
+}
