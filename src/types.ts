@@ -14,6 +14,7 @@ export type Items = {
 export type List = {
     listName: string,
     dataList: any,
+    data?:any,
     onClick: any,    
 }
 

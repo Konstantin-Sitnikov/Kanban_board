@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import  style  from "./style.module.scss"
-import TaskList from "../TaskList/tasklist";
+import Backlog, {Ready} from "../TaskList/tasklist";
 import {DataTask} from '../../types'
 
 
@@ -94,15 +94,16 @@ const readyTask:DataTask ={
             setBacklog([...backlog, {id:id, title:title, description:"This task has no description"}])
         }
 
-    function setTaskReady() {
+    function setTaskReady(id:any) {
             setBacklog([...backlog, {id:10, title:"Задача 10", description:"Выполни задачу"}])
             setReady([...ready, {id:10, title:"Задача 10", description:"Выполни задачу"}])
+            console.log(id)
         }
 
     return (
         <div className={style.main}>
-            <TaskList listName="backlog" dataList={backlog} onClick={setTaskBacklog}/>
-            <TaskList listName="ready" dataList={ready} onClick={setTaskReady}/>
+            <Backlog listName="backlog" dataList={backlog} onClick={setTaskBacklog}/>
+            <Ready listName="ready" dataList={ready} data={backlog} onClick={setTaskReady}/>
         </div>
     )
 }
@@ -117,5 +118,7 @@ export default Main
                 return (<TaskList key={ind} listName={taskName} dataList={taskDate} />)
                    
                 })
+<TaskList listName="ready" dataList={ready} onClick={setTaskReady}/>
+
 
 */ 

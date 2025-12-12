@@ -71,3 +71,26 @@
 .button_submit::before {
     content: "";
 }
+
+
+
+.task__dropdown {
+    width: 258px;
+    height: 35px;
+    padding: 7px 9px 6px 8px;
+    border: none;
+    border-radius: 5px;
+    background-color: var.$task-item-background-color;
+    cursor: pointer;
+}
+
+
+.form__dropdown {
+    position: relative;
+}
+
+.menu__dropdown {
+    top: 38px;
+    position: absolute;
+    list-style: none;
+}
