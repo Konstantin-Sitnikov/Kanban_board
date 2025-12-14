@@ -1,5 +1,5 @@
-import React, { FunctionComponent, useRef } from "react";
-import {Items, List} from '../../types'
+import React, { FunctionComponent, useRef, useState, ComponentPropsWithRef} from "react";
+import {Items, List, TypeList} from '../../types'
 import style from './style.module.scss'
 
 
@@ -9,11 +9,19 @@ const TaskItems: FunctionComponent<Items> = ({title}): React.JSX.Element => {
     )
 }
 
+function InputForm(props: ComponentPropsWithRef<"input">) {
+    return <input className={style.input} type="text" placeholder="Введите задачу" {...props} />
 
-const Backlog: FunctionComponent<List> = ({listName, dataList, onClick}): React.JSX.Element => {
+}
+
+function ButtonBacklog(props: ComponentPropsWithRef<"button">){
+    return <button className={style.button} {...props}>Add card</button>
+}
+const Backlog: FunctionComponent<List> = ({listName, taskList, setTaskList}): React.JSX.Element => {
     
-    const refForm = useRef(null)
-    const refButton = useRef(null)
+    const refForm = useRef<HTMLInputElement>(null)
+    const refButton = useRef<HTMLButtonElement>(null)
+    const [countId, setCountId] = useState(0) 
 
     function addForm() {
         
@@ -31,48 +39,46 @@ const Backlog: FunctionComponent<List> = ({listName, dataList, onClick}): React.
             if(!form.value) {
                 return
             }
-            onClick(5, form.value)
+            
+            setTaskList([...taskList, {id:countId, title:form.value, description:"This task has no description"}])
+            setCountId(countId + 1)
             form.value = ""
             form.style.display = "none"
             button.classList.remove(style.button_submit)
             button.textContent = "Add card"
         }
-        
-        
+     
     }
-   
     return (
         <div  className={style.task}>
             <span  className={style.task__titel}>{listName}</span>
             <ul className={style.task__list}>        
                 {
-                    dataList.map((data:any) => {
+                    taskList.map((data:any) => {
                         return (<TaskItems key={data.id} title={data.title}/>)
                     })
                 }
-                <input className={style.input} ref={refForm} type="text" placeholder="Введите задачу"/>   
+                <InputForm ref={refForm}/>   
             </ul>
-                <button className={style.button} ref={refButton} onClick={addForm}>
-                     Add card
-                </button>
-                           
+                <ButtonBacklog ref={refButton} onClick={addForm}/>
+                        
         </div>
-
-        
+   
         )
     }
 
-
-
-
-
-    export const Ready: FunctionComponent<List> = ({listName, dataList, data, onClick}): React.JSX.Element => {
+//taskList dropdownList
+    export const Ready: FunctionComponent<TypeList> = ({listName, taskList, dropdownList, setTaskList, setDropdownList}): React.JSX.Element => {
     
+    const refForm = useRef(null)
     const refButton = useRef(null)
 
-    function clickDropdown(e:any, foo:any) {
+    function clickDropdown(e:any) {
+            let id = Number(e.target.dataset.id)
+            console.log(dropdownList.filter((item:any) => item.id === id))
+            setTaskList([...taskList, dropdownList.filter((item:any) => item.id === id)[0]])
+            setDropdownList(dropdownList.filter((item:any) => item.id !== id))
             
-            foo(e.target)
         }
    
     return (
@@ -80,16 +86,16 @@ const Backlog: FunctionComponent<List> = ({listName, dataList, onClick}): React.
             <span  className={style.task__titel}>{listName}</span>
             <ul className={style.task__list}>        
                 {
-                    dataList.map((data:any) => {
+                    taskList.map((data:any) => {
                         return (<TaskItems key={data.id} title={data.title}/>)
                     })
                 }
-                <div className={style.form__dropdown}> 
+                <div ref={refForm} className={style.form__dropdown}> 
                     <button className={style.task__dropdown}></button>
                     <ul className={style.menu__dropdown}>
                         {
-                            data.map((dat:any) => {
-                                return (<li onClick={(e) => {clickDropdown(e, onClick)}} className={style.task__item}>{`${dat.title}`}</li>)
+                            dropdownList.map((task:any) => {
+                                return (<li key={task.id} data-id={task.id} onClick={(e) => {clickDropdown(e)}} className={style.task__item}>{`${task.title}`}</li>)
                             })
                         }
                     </ul>
@@ -102,8 +108,7 @@ const Backlog: FunctionComponent<List> = ({listName, dataList, onClick}): React.
                 </button>
                            
         </div>
-
-        
+      
         )
     }
 

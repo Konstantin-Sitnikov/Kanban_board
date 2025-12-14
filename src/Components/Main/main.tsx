@@ -55,7 +55,7 @@ import {DataTask} from '../../types'
 
 const backlogTask: DataTask = {
     backlog: [
-        {   id: 1,
+        /*{   id: 1,
             title: "Задача 1",
             description: "Надо что то сделать!!"
         },
@@ -64,13 +64,14 @@ const backlogTask: DataTask = {
             title: "Задача 2",
             description: "Надо еще что то сделать!!"
         },
-        ],
+        */],
 
 }
 
+
 const readyTask:DataTask ={
     ready: [
-        {   id: 3,
+        /*{   id: 3,
             title: "Задача 3",
             description: "Надо что то сделать!!"
         },
@@ -78,8 +79,36 @@ const readyTask:DataTask ={
         {   id: 4,
             title: "Задача 4",
             description: "Надо еще что то сделать!!"
-        },
+        },*/
         ],
+}
+
+const progressTask: DataTask = {
+    progress: [
+        /*{   id: 1,
+            title: "Задача 1",
+            description: "Надо что то сделать!!"
+        },
+
+        {   id: 2,
+            title: "Задача 2",
+            description: "Надо еще что то сделать!!"
+        },
+        */],
+}
+
+const finishedTask: DataTask = {
+    finished: [
+        /*{   id: 1,
+            title: "Задача 1",
+            description: "Надо что то сделать!!"
+        },
+
+        {   id: 2,
+            title: "Задача 2",
+            description: "Надо еще что то сделать!!"
+        },
+        */],
 }
 
 
@@ -88,22 +117,16 @@ const readyTask:DataTask ={
 
     const [backlog, setBacklog] = useState(backlogTask.backlog)
     const [ready, setReady] = useState(readyTask.ready)
-        
-    function setTaskBacklog(id:number, title:string) {
-            console.log(id)
-            setBacklog([...backlog, {id:id, title:title, description:"This task has no description"}])
-        }
-
-    function setTaskReady(id:any) {
-            setBacklog([...backlog, {id:10, title:"Задача 10", description:"Выполни задачу"}])
-            setReady([...ready, {id:10, title:"Задача 10", description:"Выполни задачу"}])
-            console.log(id)
-        }
-
+    const [progress, setProgress] = useState(progressTask.progress)
+    const [finished, setFinished] = useState(finishedTask.finished)
+            
+ 
     return (
         <div className={style.main}>
-            <Backlog listName="backlog" dataList={backlog} onClick={setTaskBacklog}/>
-            <Ready listName="ready" dataList={ready} data={backlog} onClick={setTaskReady}/>
+            <Backlog listName="backlog" taskList={backlog} setTaskList={setBacklog}/>
+            <Ready listName="ready" taskList={ready} dropdownList={backlog} setTaskList={setReady} setDropdownList={setBacklog}/>
+            <Ready listName="In Progress" taskList={progress} dropdownList={ready} setTaskList={setProgress} setDropdownList={setReady}/>
+            <Ready listName="finished" taskList={finished} dropdownList={progress} setTaskList={setFinished} setDropdownList={setProgress}/>
         </div>
     )
 }
@@ -111,14 +134,3 @@ const readyTask:DataTask ={
 
 export default Main
 
-
-/*
- Object.entries(dataMock).map(([taskName, taskDate], ind) => {
-                    
-                return (<TaskList key={ind} listName={taskName} dataList={taskDate} />)
-                   
-                })
-<TaskList listName="ready" dataList={ready} onClick={setTaskReady}/>
-
-
-*/ 

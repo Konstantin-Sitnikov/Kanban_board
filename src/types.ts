@@ -13,10 +13,20 @@ export type Items = {
 
 export type List = {
     listName: string,
-    dataList: any,
+    taskList: any,
     data?:any,
-    onClick: any,    
+    setTaskList: any,    
 }
+
+
+export type TypeList = {
+    listName:string,
+    taskList:any, 
+    dropdownList:any,
+    setTaskList:any, 
+    setDropdownList:any
+}
+
 
 export type DataTask = {
     [key:string]:any
