@@ -47,10 +47,6 @@
     cursor: pointer;
 }
 
-.input {
-    display: none;
-}
-
 
 .button {
     display: flex;
@@ -72,9 +68,15 @@
     border-radius: 5px;
 }
 
+
+.button_active {
+    background-color: aqua;
+}
+
 .button_submit::before {
     content: "";
 }
+
 
 
 
@@ -88,26 +90,6 @@
     cursor: pointer;
 }
 
-
-.form__dropdown {
-    position: relative;
-    width: 100%;
-}
-
-.menu__dropdown {
-    top: 25px;
-    width: 258px;
-    max-height: 150px;
-    position: absolute;
-    list-style: none;
-    padding: 0;
-    border: none;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    overflow-x: auto;
-    
-}
 
 .task__item_dropdown {
     padding: 0;

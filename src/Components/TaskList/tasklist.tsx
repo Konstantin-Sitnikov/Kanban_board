@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useRef, useState, ComponentPropsWithRef} from "react";
 import {Items, List, TypeList} from '../../types'
+import {InputForm, DropdownForm} from '../Forms/forms'
 import style from './style.module.scss'
 
 
@@ -9,14 +10,15 @@ const TaskItems: FunctionComponent<Items> = ({title}): React.JSX.Element => {
     )
 }
 
-function InputForm(props: ComponentPropsWithRef<"input">) {
-    return <input className={style.input} type="text" placeholder="Введите задачу" {...props} />
-
-}
 
 function ButtonBacklog(props: ComponentPropsWithRef<"button">){
     return <button className={style.button} {...props}>Add card</button>
 }
+
+//children
+
+
+
 const Backlog: FunctionComponent<List> = ({listName, taskList, setTaskList}): React.JSX.Element => {
     
     const refForm = useRef<HTMLInputElement>(null)
@@ -77,10 +79,23 @@ const Backlog: FunctionComponent<List> = ({listName, taskList, setTaskList}): Re
             let id = Number(e.target.dataset.id)
             console.log(dropdownList.filter((item:any) => item.id === id))
             setTaskList([...taskList, dropdownList.filter((item:any) => item.id === id)[0]])
-            setDropdownList(dropdownList.filter((item:any) => item.id !== id))
-            
+            setDropdownList(dropdownList.filter((item:any) => item.id !== id))    
         }
-   
+    
+    function clickButton() {
+        const form:any = refForm.current
+        const button:any = refButton.current
+        if (!button.classList.contains(style.button_active)) {
+            console.log(!button.classList.contains(style.button_active))
+            form.style.display = "flex"
+            button.classList.add(style.button_active)
+        } else {
+            form.style.display = "none"
+            button.classList.remove(style.button_active)
+        }
+    }
+
+
     return (
         <div  className={style.task}>
             <span  className={style.task__titel}>{listName}</span>
@@ -89,24 +104,21 @@ const Backlog: FunctionComponent<List> = ({listName, taskList, setTaskList}): Re
                     taskList.map((data:any) => {
                         return (<TaskItems key={data.id} title={data.title}/>)
                     })
-                }
-                
-               
-                   
+                }  
             </ul>
 
-                <div ref={refForm} className={style.form__dropdown}> 
-                    <button className={style.task__dropdown}></button>
-                    <ul className={style.menu__dropdown}>
-                        {
-                            dropdownList.map((task:any) => {
-                                return (<li key={task.id} data-id={task.id} onClick={(e) => {clickDropdown(e)}} className={style.task__item_dropdown}>{`${task.title}`}</li>)
-                            })
-                        }
-                    </ul>
-                </div>
+                <DropdownForm ref={refForm}>
+                    {
+                        dropdownList.map((task:any) => {
+                            return (<li key={task.id} data-id={task.id} onClick={(e) => {clickDropdown(e)}} className={style.task__item_dropdown}>{`${task.title}`}</li>)
+                        })
+                    }
+                </DropdownForm>
                 
-                <button className={style.button} ref={refButton} onClick={()=>{}}>
+                
+                <button className={style.button} ref={refButton} onClick={()=>{
+                    clickButton()
+                }}>
                      Add card
                 </button>
                            
