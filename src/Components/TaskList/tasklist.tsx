@@ -90,19 +90,22 @@ const Backlog: FunctionComponent<List> = ({listName, taskList, setTaskList}): Re
                         return (<TaskItems key={data.id} title={data.title}/>)
                     })
                 }
+                
+               
+                   
+            </ul>
+
                 <div ref={refForm} className={style.form__dropdown}> 
                     <button className={style.task__dropdown}></button>
                     <ul className={style.menu__dropdown}>
                         {
                             dropdownList.map((task:any) => {
-                                return (<li key={task.id} data-id={task.id} onClick={(e) => {clickDropdown(e)}} className={style.task__item}>{`${task.title}`}</li>)
+                                return (<li key={task.id} data-id={task.id} onClick={(e) => {clickDropdown(e)}} className={style.task__item_dropdown}>{`${task.title}`}</li>)
                             })
                         }
                     </ul>
                 </div>
-               
-                   
-            </ul>
+                
                 <button className={style.button} ref={refButton} onClick={()=>{}}>
                      Add card
                 </button>
