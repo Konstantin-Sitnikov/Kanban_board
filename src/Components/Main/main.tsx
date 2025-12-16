@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import  style  from "./style.module.scss"
-import Backlog, {Ready} from "../TaskList/tasklist";
+import TaskList from "../TaskList/tasklist";
+import Backlog from "../TaskList/backlog";
 import {DataTask} from '../../types'
 
 
@@ -124,9 +125,9 @@ const finishedTask: DataTask = {
     return (
         <div className={style.main}>
             <Backlog listName="backlog" taskList={backlog} setTaskList={setBacklog}/>
-            <Ready listName="ready" taskList={ready} dropdownList={backlog} setTaskList={setReady} setDropdownList={setBacklog}/>
-            <Ready listName="In Progress" taskList={progress} dropdownList={ready} setTaskList={setProgress} setDropdownList={setReady}/>
-            <Ready listName="finished" taskList={finished} dropdownList={progress} setTaskList={setFinished} setDropdownList={setProgress}/>
+            <TaskList listName="ready" taskList={ready} dropdownList={backlog} setTaskList={setReady} setDropdownList={setBacklog}/>
+            <TaskList listName="In Progress" taskList={progress} dropdownList={ready} setTaskList={setProgress} setDropdownList={setReady}/>
+            <TaskList listName="finished" taskList={finished} dropdownList={progress} setTaskList={setFinished} setDropdownList={setProgress}/>
         </div>
     )
 }

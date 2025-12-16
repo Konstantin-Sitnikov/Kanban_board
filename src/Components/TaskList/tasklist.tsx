@@ -1,6 +1,6 @@
-import React, { FunctionComponent, useRef, useState, ComponentPropsWithRef} from "react";
-import {Items, List, TypeList} from '../../types'
-import {InputForm, DropdownForm} from '../Forms/forms'
+import React, { FunctionComponent, useRef} from "react";
+import {Items, TypeList} from '../../types'
+import { DropdownForm} from '../Forms/forms'
 import style from './style.module.scss'
 
 
@@ -10,68 +10,8 @@ const TaskItems: FunctionComponent<Items> = ({title}): React.JSX.Element => {
     )
 }
 
-
-function ButtonBacklog(props: ComponentPropsWithRef<"button">){
-    return <button className={style.button} {...props}>Add card</button>
-}
-
-//children
-
-
-
-const Backlog: FunctionComponent<List> = ({listName, taskList, setTaskList}): React.JSX.Element => {
-    
-    const refForm = useRef<HTMLInputElement>(null)
-    const refButton = useRef<HTMLButtonElement>(null)
-    const [countId, setCountId] = useState(0)
- 
-
-    function addForm() {
-        const button:any = refButton.current
-        const form:any = refForm.current
-
-        if (!button.classList.contains(style.button_submit)) {
-
-            form.style.display = "flex"
-            form.focus()
-            button.classList.add(style.button_submit)
-            button.textContent = "Submit"
-        }   else {
-
-           
-            if(!form.value) {
-                return
-            }
-            
-            setTaskList([...taskList, {id:countId, title:form.value, description:"This task has no description"}])
-            setCountId(countId + 1)
-            form.value = ""
-            form.style.display = "none"
-            button.classList.remove(style.button_submit)
-            button.textContent = "Add card"
-        }
-     
-    }
-    return (
-        <div  className={style.task}>
-            <span  className={style.task__titel}>{listName}</span>
-            <ul className={style.task__list}>        
-                {
-                    taskList.map((data:any) => {
-                        return (<TaskItems key={data.id} title={data.title}/>)
-                    })
-                }
-                <InputForm ref={refForm}/>   
-            </ul>
-                <ButtonBacklog ref={refButton} onClick={addForm}/>
-                        
-        </div>
-   
-        )
-    }
-
 //taskList dropdownList
-    export const Ready: FunctionComponent<TypeList> = ({listName, taskList, dropdownList, setTaskList, setDropdownList}): React.JSX.Element => {
+const TaskList: FunctionComponent<TypeList> = ({listName, taskList, dropdownList, setTaskList, setDropdownList}): React.JSX.Element => {
     
     const refForm = useRef(null)
     const refButton = useRef(null)
@@ -135,4 +75,4 @@ const Backlog: FunctionComponent<List> = ({listName, taskList, setTaskList}): Re
 
 
 
-export default Backlog
+export default TaskList

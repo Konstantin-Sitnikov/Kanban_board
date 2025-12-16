@@ -1,16 +1,6 @@
 @use "../var.scss";
 
 
-.input {
-    display: none;
-    width: 258px;
-    height: 35px;
-    padding: 7px 9px 6px 8px;
-    border: none;
-    border-radius: 5px;
-    background-color: var.$task-item-background-color;
-}
-
 
 .button__dropdown {
     width: 258px;
@@ -62,6 +52,7 @@
     display: none;
     flex-direction: column;
     overflow-x: auto;
+    z-index: 2;
     
 }
 

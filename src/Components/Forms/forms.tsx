@@ -1,12 +1,7 @@
-import React, { ComponentPropsWithRef, useRef, useState } from "react";
+import React, { ComponentPropsWithRef, useRef} from "react";
 import  style  from "./style.module.scss"
 
-export function InputForm(props: ComponentPropsWithRef<"input">) {
-    const [value, setValue] = useState("")
 
-    return <input value={value} onChange={event => setValue(event.target.value)} className={style.input} type="text" placeholder="Введите задачу" {...props} />
-
-}
 
 
 export const DropdownForm = React.forwardRef<HTMLDivElement, ComponentPropsWithRef<"div">>(function ({children, ...props}, ref) {

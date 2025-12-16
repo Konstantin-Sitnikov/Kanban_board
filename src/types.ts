@@ -1,3 +1,6 @@
+
+
+
 export type User = {
     name?:string;
     year?: number;
@@ -31,3 +34,4 @@ export type TypeList = {
 export type DataTask = {
     [key:string]:any
 }
+
