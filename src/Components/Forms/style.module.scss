@@ -3,6 +3,12 @@
 
 .input {
     display: none;
+    width: 258px;
+    height: 35px;
+    padding: 7px 9px 6px 8px;
+    border: none;
+    border-radius: 5px;
+    background-color: var.$task-item-background-color;
 }
 
 
@@ -13,13 +19,25 @@
     border: none;
     border-radius: 5px;
     background-color: var.$task-item-background-color;
+    position: relative;
     cursor: pointer;
+} 
+
+.button__dropdown::before {
+    content: ">";
+    position: absolute;
+    top: 0px;
+    right: 20px;
+    transform: rotate(-90deg);
+    font-size: 30px;
 }
 
 .button__dropdown_active {
     background-color: aqua;
 }
-
+.button__dropdown_active::before {
+    transform: rotate(90deg);
+}
 
 
 .form__dropdown {

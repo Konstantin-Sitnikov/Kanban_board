@@ -23,12 +23,13 @@ const Backlog: FunctionComponent<List> = ({listName, taskList, setTaskList}): Re
     
     const refForm = useRef<HTMLInputElement>(null)
     const refButton = useRef<HTMLButtonElement>(null)
-    const [countId, setCountId] = useState(0) 
+    const [countId, setCountId] = useState(0)
+ 
 
     function addForm() {
-        
         const button:any = refButton.current
         const form:any = refForm.current
+
         if (!button.classList.contains(style.button_submit)) {
 
             form.style.display = "flex"
@@ -74,6 +75,8 @@ const Backlog: FunctionComponent<List> = ({listName, taskList, setTaskList}): Re
     
     const refForm = useRef(null)
     const refButton = useRef(null)
+    const form:any = refForm.current
+    const button:any = refButton.current
 
     function clickDropdown(e:any) {
             let id = Number(e.target.dataset.id)
@@ -83,8 +86,7 @@ const Backlog: FunctionComponent<List> = ({listName, taskList, setTaskList}): Re
         }
     
     function clickButton() {
-        const form:any = refForm.current
-        const button:any = refButton.current
+
         if (!button.classList.contains(style.button_active)) {
             console.log(!button.classList.contains(style.button_active))
             form.style.display = "flex"

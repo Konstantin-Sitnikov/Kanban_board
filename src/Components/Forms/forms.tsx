@@ -1,8 +1,10 @@
-import React, { ComponentPropsWithRef, useRef } from "react";
+import React, { ComponentPropsWithRef, useRef, useState } from "react";
 import  style  from "./style.module.scss"
 
 export function InputForm(props: ComponentPropsWithRef<"input">) {
-    return <input className={style.input} type="text" placeholder="Введите задачу" {...props} />
+    const [value, setValue] = useState("")
+
+    return <input value={value} onChange={event => setValue(event.target.value)} className={style.input} type="text" placeholder="Введите задачу" {...props} />
 
 }
 

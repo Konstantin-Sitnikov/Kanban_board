@@ -49,16 +49,20 @@
 
 
 .button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 3px;
+    width: 102px;
+    height: 29px;
     border: none;
+    border-radius: 5px;
+    position: relative;
     cursor: pointer;
 }
 
 .button::before {
     content: "+";
+    font-size: 25px;
+    position: absolute;
+    top: 0px;
+    left: 6px;
 }
 
 .button_submit {
@@ -70,7 +74,7 @@
 
 
 .button_active {
-    background-color: aqua;
+    background-color: #FFFFFF;
 }
 
 .button_submit::before {
