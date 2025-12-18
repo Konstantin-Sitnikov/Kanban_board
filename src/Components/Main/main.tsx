@@ -3,6 +3,9 @@ import  style  from "./style.module.scss"
 import TaskList from "../TaskList/tasklist";
 import Backlog from "../TaskList/backlog";
 import {DataTask} from '../../types'
+import { Routes, Route } from 'react-router-dom'
+import TaskDetail from "../TaskDetail/taskdetail";
+
 
 
 /*const dataMock: DataTask = {
@@ -112,22 +115,37 @@ const finishedTask: DataTask = {
         */],
 }
 
-
-
- function Main() {
-
+function Tasks() {
     const [backlog, setBacklog] = useState(backlogTask.backlog)
     const [ready, setReady] = useState(readyTask.ready)
     const [progress, setProgress] = useState(progressTask.progress)
     const [finished, setFinished] = useState(finishedTask.finished)
-            
- 
     return (
-        <div id="main" className={style.main}>
+        <>
             <Backlog listName="backlog" taskList={backlog} setTaskList={setBacklog}/>
             <TaskList listName="ready" taskList={ready} dropdownList={backlog} setTaskList={setReady} setDropdownList={setBacklog}/>
             <TaskList listName="In Progress" taskList={progress} dropdownList={ready} setTaskList={setProgress} setDropdownList={setReady}/>
             <TaskList listName="finished" taskList={finished} dropdownList={progress} setTaskList={setFinished} setDropdownList={setProgress}/>
+        </>
+    )
+}
+
+
+ function Main() {
+
+    const [test, setTest] = useState<number>(0)
+            
+ 
+    return (
+        <div id="main" className={style.main}>
+
+            <Routes>
+                <Route path="/" element={<Tasks/>}></Route>
+                <Route path="/tasks/:taskId" element={<TaskDetail/>}></Route>
+            </Routes>
+            
+
+
         </div>
     )
 }

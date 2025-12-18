@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useRef, useState, useEffect} from "react";
 import {List} from '../../types'
 import TaskDetail from "../TaskDetail/taskdetail";
+import { Link } from 'react-router-dom'
 
 import style from './style.module.scss'
 
@@ -69,7 +70,7 @@ const Backlog: FunctionComponent<List> = ({listName, taskList, setTaskList}): Re
             <ul className={style.task__list}>        
                 {
                     taskList.map((task:any) => {
-                        return ( <li key={task.id} className={style.task__item} onClick={clickTask}>{`${task.title}`}</li>)
+                        return ( <li key={task.id} className={style.task__item} onClick={clickTask}><Link to={`/tasks/${task.id}`}>{`${task.title}`}</Link></li>)
                     })
                 }
                   

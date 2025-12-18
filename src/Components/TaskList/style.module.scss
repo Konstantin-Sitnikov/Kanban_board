@@ -57,6 +57,11 @@
     cursor: pointer;
 }
 
+.task__link {
+    width: 100%;
+    height: 100%;
+}
+
 .button::before {
     content: "+";
     font-size: 25px;
