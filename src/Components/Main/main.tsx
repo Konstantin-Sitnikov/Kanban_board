@@ -123,7 +123,7 @@ const finishedTask: DataTask = {
             
  
     return (
-        <div className={style.main}>
+        <div id="main" className={style.main}>
             <Backlog listName="backlog" taskList={backlog} setTaskList={setBacklog}/>
             <TaskList listName="ready" taskList={ready} dropdownList={backlog} setTaskList={setReady} setDropdownList={setBacklog}/>
             <TaskList listName="In Progress" taskList={progress} dropdownList={ready} setTaskList={setProgress} setDropdownList={setReady}/>

@@ -1,5 +1,6 @@
-import React, { FunctionComponent, useRef, useState, ComponentPropsWithRef, useEffect} from "react";
+import React, { FunctionComponent, useRef, useState, useEffect} from "react";
 import {List} from '../../types'
+import TaskDetail from "../TaskDetail/taskdetail";
 
 import style from './style.module.scss'
 
@@ -12,6 +13,7 @@ const Backlog: FunctionComponent<List> = ({listName, taskList, setTaskList}): Re
     
     const [countId, setCountId] = useState(0)
     const [valueForm, setValueForm] = useState("")
+    const [taskDetail, setTaskDetail] = useState(false)
 
     useEffect(()=>{
 
@@ -51,6 +53,15 @@ const Backlog: FunctionComponent<List> = ({listName, taskList, setTaskList}): Re
         setValueForm("")
     }
 
+    function clickTask () {
+        if (!taskDetail) {
+            setTaskDetail(true)
+        } else {
+            setTaskDetail(false)
+        }
+        
+    }
+
 
     return (
         <div  className={style.task}>
@@ -58,7 +69,7 @@ const Backlog: FunctionComponent<List> = ({listName, taskList, setTaskList}): Re
             <ul className={style.task__list}>        
                 {
                     taskList.map((task:any) => {
-                        return ( <li key={task.id} className={style.task__item}>{`${task.title}`}</li>)
+                        return ( <li key={task.id} className={style.task__item} onClick={clickTask}>{`${task.title}`}</li>)
                     })
                 }
                   
@@ -68,12 +79,19 @@ const Backlog: FunctionComponent<List> = ({listName, taskList, setTaskList}): Re
                 <div>
                     <button ref={refButtonAddForm} className={style.button} onClick={addForm}>Add card</button>
                     <button ref={refButtonSumbit} className={style.button_sumbit} onClick={clickButtonSumbit}>Submit</button>
-                </div>
+                </div> 
+                {
+                   taskDetail ?  (
+                    <TaskDetail/>
+                   ) : null
+                }
                         
         </div>
    
         )
     }
+
+
 
 
 export default Backlog

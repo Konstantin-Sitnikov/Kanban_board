@@ -1,0 +1,18 @@
+@use "../var.scss";
+
+.taskDetail {
+    width: 1181px;
+    height: 548px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 5px;
+}
+
+.footer__text {
+    font-family: 'Roboto';
+    font-size: 18px;
+
+}
