@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import  style  from "./style.module.scss"
 import TaskList from "../TaskList/tasklist";
 import Backlog from "../TaskList/backlog";
@@ -57,9 +57,9 @@ import TaskDetail from "../TaskDetail/taskdetail";
 
 }*/
 
-const backlogTask: DataTask = {
+/*const backlogTask: DataTask = {
     backlog: [
-        /*{   id: 1,
+        {   id: 1,
             title: "Задача 1",
             description: "Надо что то сделать!!"
         },
@@ -68,9 +68,9 @@ const backlogTask: DataTask = {
             title: "Задача 2",
             description: "Надо еще что то сделать!!"
         },
-        */],
+        ],
 
-}
+}*/
 
 
 const readyTask:DataTask ={
@@ -116,10 +116,25 @@ const finishedTask: DataTask = {
 }
 
 function Tasks() {
-    const [backlog, setBacklog] = useState(backlogTask.backlog)
+    let backlogTask:any = []
+    if (localStorage.getItem("backlog")) {
+        backlogTask = JSON.parse(localStorage.getItem("backlog")!)
+    }
+
+
+
+    const [backlog, setBacklog] = useState(backlogTask)
     const [ready, setReady] = useState(readyTask.ready)
     const [progress, setProgress] = useState(progressTask.progress)
     const [finished, setFinished] = useState(finishedTask.finished)
+
+    useEffect(()=>{
+        localStorage.setItem("backlog", JSON.stringify(backlog))
+    }, [backlog])
+
+
+
+    
     return (
         <>
             <Backlog listName="backlog" taskList={backlog} setTaskList={setBacklog}/>

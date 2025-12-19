@@ -1,20 +1,20 @@
-import React, { FunctionComponent, useRef, useState, useEffect} from "react";
+import React, { FunctionComponent, useRef, useState, useEffect, ForwardedRef, ComponentPropsWithRef} from "react";
 import {List} from '../../types'
-import TaskDetail from "../TaskDetail/taskdetail";
 import { Link } from 'react-router-dom'
 
 import style from './style.module.scss'
 
 
+
 const Backlog: FunctionComponent<List> = ({listName, taskList, setTaskList}): React.JSX.Element => {
     
+    console.log(taskList)
     const refForm = useRef<HTMLInputElement | null>(null)
     const refButtonAddForm = useRef<HTMLButtonElement | null>(null)
     const refButtonSumbit = useRef<HTMLButtonElement | null>(null)
     
     const [countId, setCountId] = useState(0)
     const [valueForm, setValueForm] = useState("")
-    const [taskDetail, setTaskDetail] = useState(false)
 
     useEffect(()=>{
 
@@ -48,20 +48,13 @@ const Backlog: FunctionComponent<List> = ({listName, taskList, setTaskList}): Re
            
         }
     }
+    
     function clickButtonSumbit() {
         setTaskList([...taskList, {id:countId, title:valueForm, description:"This task has no description"}])
         setCountId(countId + 1)
         setValueForm("")
     }
 
-    function clickTask () {
-        if (!taskDetail) {
-            setTaskDetail(true)
-        } else {
-            setTaskDetail(false)
-        }
-        
-    }
 
 
     return (
@@ -70,22 +63,17 @@ const Backlog: FunctionComponent<List> = ({listName, taskList, setTaskList}): Re
             <ul className={style.task__list}>        
                 {
                     taskList.map((task:any) => {
-                        return ( <li key={task.id} className={style.task__item} onClick={clickTask}><Link to={`/tasks/${task.id}`}>{`${task.title}`}</Link></li>)
+                        console.log("re")
+                        return ( <li key={task.id} className={style.task__item}><Link to={`/tasks/${task.id}`}>{`${task.title}`}</Link></li>)
                     })
                 }
                   
             </ul>
                 <input ref={refForm} value={valueForm} onChange={event => setValueForm(event.target.value)} className={style.input} type="text" placeholder="Введите задачу"  /> 
-                
                 <div>
                     <button ref={refButtonAddForm} className={style.button} onClick={addForm}>Add card</button>
                     <button ref={refButtonSumbit} className={style.button_sumbit} onClick={clickButtonSumbit}>Submit</button>
                 </div> 
-                {
-                   taskDetail ?  (
-                    <TaskDetail/>
-                   ) : null
-                }
                         
         </div>
    
