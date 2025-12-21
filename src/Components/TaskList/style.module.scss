@@ -74,15 +74,7 @@
     background-color: #FFFFFF;
 }
 
-.button_sumbit {
-    display: none;
-    width: 102px;
-    height: 29px;
-    border: none;
-    border-radius: 5px;
-    background-color: var.$button-background-color;
-    cursor: pointer;
-}
+
 
 
 .task__dropdown {
@@ -111,12 +103,3 @@
 }
 
 
-.input {
-    display: none;
-    width: 258px;
-    height: 35px;
-    padding: 7px 9px 6px 8px;
-    border: none;
-    border-radius: 5px;
-    background-color: var.$task-item-background-color;
-}

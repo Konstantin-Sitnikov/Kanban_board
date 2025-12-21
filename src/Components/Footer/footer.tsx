@@ -1,14 +1,14 @@
 import React, { FunctionComponent } from "react";
 import  style  from "./style.module.scss"
-import { User } from "../../types";
+import { DataFooter } from "../../types";
 
 
-const Footer: FunctionComponent<User> = ({name, year}): React.JSX.Element => {
+const Footer: FunctionComponent<DataFooter> = ({name, year, activeTasks, finishedTasks}): React.JSX.Element => {
     return (
         <div className={style.footer}>
             <div className={style.footer__container}>
-                <span className={style.footer__text}>Active tasks: </span>
-                <span className={style.footer__text}>Finished tasks: </span>
+                <span className={style.footer__text}>Active tasks: {activeTasks}</span>
+                <span className={style.footer__text}>Finished tasks: {finishedTasks}</span>
 
             </div>
             <span className={style.footer__text}>Kanban board by {name}, {year}</span>

@@ -1,6 +1,7 @@
-import React, { FunctionComponent, useRef, useState, useEffect, ForwardedRef, ComponentPropsWithRef} from "react";
+import React, { FunctionComponent, useRef, useState } from "react";
 import {List} from '../../types'
 import { Link } from 'react-router-dom'
+import { InputForm } from '../Forms/forms'
 
 import style from './style.module.scss'
 
@@ -9,32 +10,20 @@ import style from './style.module.scss'
 const Backlog: FunctionComponent<List> = ({listName, taskList, setTaskList}): React.JSX.Element => {
     
     console.log(taskList)
-    const refForm = useRef<HTMLInputElement | null>(null)
+    const refForm = useRef<HTMLDivElement | null>(null)
     const refButtonAddForm = useRef<HTMLButtonElement | null>(null)
-    const refButtonSumbit = useRef<HTMLButtonElement | null>(null)
+
     
     const [countId, setCountId] = useState(0)
     const [valueForm, setValueForm] = useState("")
 
-    useEffect(()=>{
-
-        const buttonSumbit:any = refButtonSumbit.current
-        const buttonForm:any = refButtonAddForm.current
-
-        if (valueForm !== "") {
-            buttonSumbit.style.display = "block"
-            buttonForm.style.display = "none"
-        } else {
-            buttonSumbit.style.display = "none"
-            buttonForm.style.display = "block"
-        }
-    }, [valueForm])
  
 
     function addForm() {
 
         const button:any = refButtonAddForm.current
         const form:any = refForm.current
+        console.log(form)
 
         if (!button.classList.contains(style.button_active)) {
             form.style.display = "flex"
@@ -69,11 +58,12 @@ const Backlog: FunctionComponent<List> = ({listName, taskList, setTaskList}): Re
                 }
                   
             </ul>
-                <input ref={refForm} value={valueForm} onChange={event => setValueForm(event.target.value)} className={style.input} type="text" placeholder="Введите задачу"  /> 
-                <div>
-                    <button ref={refButtonAddForm} className={style.button} onClick={addForm}>Add card</button>
-                    <button ref={refButtonSumbit} className={style.button_sumbit} onClick={clickButtonSumbit}>Submit</button>
-                </div> 
+
+            <InputForm ref={refForm} list={taskList} setTask={setTaskList}/>
+
+            <button ref={refButtonAddForm} className={style.button} onClick={addForm}>Add card</button>
+                    
+              
                         
         </div>
    

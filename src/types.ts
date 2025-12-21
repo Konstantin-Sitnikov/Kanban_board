@@ -1,6 +1,19 @@
 
 
 
+export type DataFooter = {
+    name?:string;
+    year?: number;
+    avatar?: any
+    activeTasks: number;
+    finishedTasks: number
+}
+
+export type DataMain = {
+    setActiveTasks: void;
+    setFinishedTasks: void
+}
+
 export type User = {
     name?:string;
     year?: number;

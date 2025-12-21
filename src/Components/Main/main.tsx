@@ -2,137 +2,46 @@ import React, { useEffect, useState } from "react";
 import  style  from "./style.module.scss"
 import TaskList from "../TaskList/tasklist";
 import Backlog from "../TaskList/backlog";
-import {DataTask} from '../../types'
+//import {DataTask} from '../../types'
 import { Routes, Route } from 'react-router-dom'
 import TaskDetail from "../TaskDetail/taskdetail";
 
 
-
-/*const dataMock: DataTask = {
-    backlog: [
-        {   id: 1,
-            title: "Задача 1",
-            description: "Надо что то сделать!!"
-        },
-
-        {   id: 2,
-            title: "Задача 2",
-            description: "Надо еще что то сделать!!"
-        },
-        ],
-    
-    ready: [
-        {   id: 3,
-            title: "Задача 3",
-            description: "Надо что то сделать!!"
-        },
-
-        {   id: 4,
-            title: "Задача 4",
-            description: "Надо еще что то сделать!!"
-        },
-        ],
-    "In Progress": [
-        {   id: 5,
-            title: "Задача 5",
-            description: "Надо что то сделать!!"
-        },
-
-        {   id: 6,
-            title: "Задача 6",
-            description: "Надо еще что то сделать!!"
-        },
-        ],
-    finished:[
-        {   id: 7,
-            title: "Задача 7",
-            description: "Надо что то сделать!!"
-        },
-
-        {   id: 8,
-            title: "Задача 8",
-            description: "Надо еще что то сделать!!"
-        },
-        ]
-
-}*/
-
-/*const backlogTask: DataTask = {
-    backlog: [
-        {   id: 1,
-            title: "Задача 1",
-            description: "Надо что то сделать!!"
-        },
-
-        {   id: 2,
-            title: "Задача 2",
-            description: "Надо еще что то сделать!!"
-        },
-        ],
-
-}*/
-
-
-const readyTask:DataTask ={
-    ready: [
-        /*{   id: 3,
-            title: "Задача 3",
-            description: "Надо что то сделать!!"
-        },
-
-        {   id: 4,
-            title: "Задача 4",
-            description: "Надо еще что то сделать!!"
-        },*/
-        ],
-}
-
-const progressTask: DataTask = {
-    progress: [
-        /*{   id: 1,
-            title: "Задача 1",
-            description: "Надо что то сделать!!"
-        },
-
-        {   id: 2,
-            title: "Задача 2",
-            description: "Надо еще что то сделать!!"
-        },
-        */],
-}
-
-const finishedTask: DataTask = {
-    finished: [
-        /*{   id: 1,
-            title: "Задача 1",
-            description: "Надо что то сделать!!"
-        },
-
-        {   id: 2,
-            title: "Задача 2",
-            description: "Надо еще что то сделать!!"
-        },
-        */],
-}
-
-function Tasks() {
-    let backlogTask:any = []
-    if (localStorage.getItem("backlog")) {
-        backlogTask = JSON.parse(localStorage.getItem("backlog")!)
+function getLocalStorage(key:string) {
+    if (localStorage.getItem(key)) {
+        return JSON.parse(localStorage.getItem(key)!)
+    } else {
+        return []
     }
+}
+
+function Tasks({setActiveTasks, setFinishedTasks}:any) {
 
 
 
-    const [backlog, setBacklog] = useState(backlogTask)
-    const [ready, setReady] = useState(readyTask.ready)
-    const [progress, setProgress] = useState(progressTask.progress)
-    const [finished, setFinished] = useState(finishedTask.finished)
+    const [backlog, setBacklog] = useState(getLocalStorage("backlog"))
+    const [ready, setReady] = useState(getLocalStorage("ready"))
+    const [progress, setProgress] = useState(getLocalStorage("progress"))
+    const [finished, setFinished] = useState(getLocalStorage("finished"))
 
     useEffect(()=>{
         localStorage.setItem("backlog", JSON.stringify(backlog))
+        setActiveTasks(backlog.length)
     }, [backlog])
 
+    
+    useEffect(()=>{
+        localStorage.setItem("ready", JSON.stringify(ready))
+    }, [ready])
 
+    useEffect(()=>{
+        localStorage.setItem("progress", JSON.stringify(progress))
+    }, [progress])
+
+    useEffect(()=>{
+        localStorage.setItem("finished", JSON.stringify(finished))
+        setFinishedTasks(finished.length)
+    }, [finished])
 
     
     return (
@@ -146,16 +55,20 @@ function Tasks() {
 }
 
 
- function Main() {
+ function Main({setActiveTasks, setFinishedTasks}:any) {
 
-    const [test, setTest] = useState<number>(0)
-            
+    function setActive(count: number):void {
+        setActiveTasks(count)
+    }
+
+    function setFsetFinished(count:number): void{
+        setFinishedTasks(count)}
  
     return (
         <div id="main" className={style.main}>
 
             <Routes>
-                <Route path="/" element={<Tasks/>}></Route>
+                <Route path="/" element={<Tasks setActiveTasks={setActive} setFinishedTasks={setFsetFinished}/>}></Route>
                 <Route path="/tasks/:taskId" element={<TaskDetail/>}></Route>
             </Routes>
             

@@ -59,3 +59,30 @@
 .menu__dropdown_active {
     display: flex;
 }
+
+.input {
+    display: none;
+    position: relative;
+}
+
+.input__form {
+    width: 258px;
+    height: 35px;
+    padding: 7px 9px 6px 8px;
+    border: none;
+    border-radius: 5px;
+    background-color: var.$task-item-background-color;
+}
+
+.button_sumbit {
+    display: none;
+    position: absolute;
+    top: 50px;
+    width: 102px;
+    height: 29px;
+    border: none;
+    border-radius: 5px;
+    background-color: var.$button-background-color;
+    cursor: pointer;
+    z-index: 3;
+}
