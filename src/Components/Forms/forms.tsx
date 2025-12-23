@@ -42,15 +42,22 @@ export const InputForm = React.forwardRef<HTMLDivElement, input>(function ({list
     )
 })
 
+interface DataDropdown {
+    taskList:any;
+    dropdownList:any;
+    setTaskList: any;
+    setDropdownList:any
+}
 
-export const DropdownForm = React.forwardRef<HTMLDivElement, ComponentPropsWithRef<"div">>(function ({children, ...props}, ref) {
+export const DropdownForm = React.forwardRef<HTMLDivElement, DataDropdown>(function ({taskList, dropdownList, setTaskList, setDropdownList, ...props}, ref) {
         const refForm = useRef(null)
         const refButton = useRef(null)
         
-        const form:any = refForm.current
-        const button:any = refButton.current
+
 
         function clickButton() {
+            const form:any = refForm.current
+            const button:any = refButton.current
         if (!button.classList.contains(style.button__dropdown_active)) {
             console.log(!button.classList.contains(style.button__dropdown_active))
             form.style.display = "flex"
@@ -62,13 +69,24 @@ export const DropdownForm = React.forwardRef<HTMLDivElement, ComponentPropsWithR
         }
 
 
+        function clickDropdown(e:any) {
+            let id = Number(e.target.dataset.id)
+            console.log(dropdownList.filter((item:any) => item.id === id))
+            setTaskList([...taskList, dropdownList.filter((item:any) => item.id === id)[0]])
+            setDropdownList(dropdownList.filter((item:any) => item.id !== id))    
+            }
+
+
 
     return (<div ref={ref} className={style.form__dropdown}> 
         <button ref={refButton} className={style.button__dropdown} onClick={clickButton}></button>
         <ul ref={refForm} className={style.menu__dropdown}>
-            {
-            children
-            }
+                    
+                    {
+                        dropdownList.map((task:any) => {
+                            return (<li key={task.id} data-id={task.id} onClick={(e) => {clickDropdown(e)}} className={style.task__item_dropdown}>{`${task.title}`}</li>)
+                        })
+                    }
         </ul>
     </div>)
 }

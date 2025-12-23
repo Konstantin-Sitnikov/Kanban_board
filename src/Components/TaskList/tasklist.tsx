@@ -12,23 +12,16 @@ const TaskItems: FunctionComponent<Items> = ({title}): React.JSX.Element => {
 
 //taskList dropdownList
 const TaskList: FunctionComponent<TypeList> = ({listName, taskList, dropdownList, setTaskList, setDropdownList}): React.JSX.Element => {
-    
     const refForm = useRef(null)
     const refButton = useRef(null)
-    const form:any = refForm.current
-    const button:any = refButton.current
 
-    function clickDropdown(e:any) {
-            let id = Number(e.target.dataset.id)
-            console.log(dropdownList.filter((item:any) => item.id === id))
-            setTaskList([...taskList, dropdownList.filter((item:any) => item.id === id)[0]])
-            setDropdownList(dropdownList.filter((item:any) => item.id !== id))    
-        }
+
+
     
     function clickButton() {
-
+            const form:any = refForm.current
+            const button:any = refButton.current
         if (!button.classList.contains(style.button_active)) {
-            console.log(!button.classList.contains(style.button_active))
             form.style.display = "flex"
             button.classList.add(style.button_active)
         } else {
@@ -49,14 +42,8 @@ const TaskList: FunctionComponent<TypeList> = ({listName, taskList, dropdownList
                 }  
             </ul>
 
-                <DropdownForm ref={refForm}>
-                    {
-                        dropdownList.map((task:any) => {
-                            return (<li key={task.id} data-id={task.id} onClick={(e) => {clickDropdown(e)}} className={style.task__item_dropdown}>{`${task.title}`}</li>)
-                        })
-                    }
-                </DropdownForm>
-                
+                <DropdownForm ref={refForm} taskList={taskList} dropdownList={dropdownList}setTaskList={setTaskList} setDropdownList={setDropdownList} />
+                    
                 
                 <button className={style.button} ref={refButton} onClick={()=>{
                     clickButton()

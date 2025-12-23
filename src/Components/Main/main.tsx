@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import  style  from "./style.module.scss"
 import TaskList from "../TaskList/tasklist";
 import Backlog from "../TaskList/backlog";
@@ -17,8 +17,6 @@ function getLocalStorage(key:string) {
 
 function Tasks({setActiveTasks, setFinishedTasks}:any) {
 
-
-
     const [backlog, setBacklog] = useState(getLocalStorage("backlog"))
     const [ready, setReady] = useState(getLocalStorage("ready"))
     const [progress, setProgress] = useState(getLocalStorage("progress"))
@@ -28,11 +26,12 @@ function Tasks({setActiveTasks, setFinishedTasks}:any) {
         localStorage.setItem("backlog", JSON.stringify(backlog))
         setActiveTasks(backlog.length)
     }, [backlog])
-
+    
     
     useEffect(()=>{
         localStorage.setItem("ready", JSON.stringify(ready))
     }, [ready])
+    
 
     useEffect(()=>{
         localStorage.setItem("progress", JSON.stringify(progress))
@@ -57,18 +56,13 @@ function Tasks({setActiveTasks, setFinishedTasks}:any) {
 
  function Main({setActiveTasks, setFinishedTasks}:any) {
 
-    function setActive(count: number):void {
-        setActiveTasks(count)
-    }
 
-    function setFsetFinished(count:number): void{
-        setFinishedTasks(count)}
  
     return (
         <div id="main" className={style.main}>
 
             <Routes>
-                <Route path="/" element={<Tasks setActiveTasks={setActive} setFinishedTasks={setFsetFinished}/>}></Route>
+                <Route path="/" element={<Tasks setActiveTasks={setActiveTasks} setFinishedTasks={setFinishedTasks}/>}></Route>
                 <Route path="/tasks/:taskId" element={<TaskDetail/>}></Route>
             </Routes>
             
