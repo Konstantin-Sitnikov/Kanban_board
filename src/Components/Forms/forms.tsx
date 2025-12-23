@@ -1,5 +1,8 @@
-import React, { ComponentPropsWithRef, useRef, useState, useEffect} from "react";
+import React, { useRef, useState, useEffect} from "react";
 import  style  from "./style.module.scss"
+import { getCountID } from '../LocalStorage/localstorage'
+import {ButtonSumbit, ButtonDropdown} from '../Button/button'
+import styleButton from '../Button/style.module.scss'
 
 interface input {
     list:any;
@@ -12,7 +15,7 @@ export const InputForm = React.forwardRef<HTMLDivElement, input>(function ({list
     const [valueForm, setValueForm] = useState("")
     const refButtonSumbit = useRef<HTMLButtonElement | null>(null)
     const refForm = useRef<HTMLInputElement | null>(null)
-    const [countId, setCountId] = useState(0)
+    const [countId, setCountId] = useState(getCountID)
 
 
     function clickButtonSumbit() {
@@ -20,6 +23,11 @@ export const InputForm = React.forwardRef<HTMLDivElement, input>(function ({list
         setCountId(countId + 1)
         setValueForm("")
     }
+
+
+    useEffect(()=>{
+        localStorage.setItem("countId", JSON.stringify(countId))
+    }, [countId])
 
     useEffect(()=>{
     
@@ -37,7 +45,8 @@ export const InputForm = React.forwardRef<HTMLDivElement, input>(function ({list
     return (
         <div className={style.input} ref={ref}>
             <input ref={refForm} value={valueForm} onChange={event => setValueForm(event.target.value)} className={style.input__form} type="text" placeholder="Введите задачу"  />
-            <button ref={refButtonSumbit} className={style.button_sumbit} onClick={clickButtonSumbit}>Submit</button>
+            <ButtonSumbit ref={refButtonSumbit} onClick={clickButtonSumbit}>Submit</ButtonSumbit>
+
         </div>
     )
 })
@@ -58,13 +67,13 @@ export const DropdownForm = React.forwardRef<HTMLDivElement, DataDropdown>(funct
         function clickButton() {
             const form:any = refForm.current
             const button:any = refButton.current
-        if (!button.classList.contains(style.button__dropdown_active)) {
-            console.log(!button.classList.contains(style.button__dropdown_active))
+
+        if (!button.classList.contains(styleButton.button__dropdown_active)) {
             form.style.display = "flex"
-            button.classList.add(style.button__dropdown_active)
+            button.classList.add(styleButton.button__dropdown_active)
         } else {
             form.style.display = "none"
-            button.classList.remove(style.button__dropdown_active)
+            button.classList.remove(styleButton.button__dropdown_active)
         }
         }
 
@@ -79,7 +88,7 @@ export const DropdownForm = React.forwardRef<HTMLDivElement, DataDropdown>(funct
 
 
     return (<div ref={ref} className={style.form__dropdown}> 
-        <button ref={refButton} className={style.button__dropdown} onClick={clickButton}></button>
+        <ButtonDropdown ref={refButton} onClick={clickButton}/>
         <ul ref={refForm} className={style.menu__dropdown}>
                     
                     {

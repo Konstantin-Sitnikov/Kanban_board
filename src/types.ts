@@ -42,15 +42,16 @@ export type List = {
 
 
 export type TypeList = {
-    listName:string,
-    taskList:any, 
-    dropdownList:any,
-    setTaskList:any, 
-    setDropdownList:any
+    listName: string,
+    taskList: any,
+    setTaskList: Function, 
+    dropdownList?:any,
+    setDropdownList?: Function,
 }
 
 
-export type DataTask = {
-    [key:string]:any
+export type DataTasks = {
+    setActiveTasks: Function,
+    setFinishedTasks: Function,
 }
 
