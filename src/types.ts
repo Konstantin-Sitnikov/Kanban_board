@@ -34,8 +34,8 @@ export type TypeList = {
     listName: string,
     taskList: [{id:number, titel:string, description:string}] | [],
     setTaskList: Function, 
-    dropdownList?:[{id:number, titel:string, description:string}] | [],
-    setDropdownList?: Function,
+    dropdownList:[{id:number, titel:string, description:string}] | [],
+    setDropdownList: Function,
 }
 
 

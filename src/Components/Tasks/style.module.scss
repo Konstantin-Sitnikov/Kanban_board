@@ -18,6 +18,10 @@
     font-family: 'Roboto';
     font-size: 18px;
 }
+.task__link {
+    text-decoration: none;
+    color: black;
+}
 
 .task__titel::first-letter {
     text-transform: uppercase;

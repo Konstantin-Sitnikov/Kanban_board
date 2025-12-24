@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect} from "react";
 import  style  from "./style.module.scss"
 import { getCountID } from '../LocalStorage/localstorage'
-import { Button, ButtonDropdown} from '../Button/button'
+import { Button } from '../Button/button'
 import styleButton from '../Button/style.module.scss'
 
 interface input {
@@ -52,17 +52,17 @@ export const InputForm = React.forwardRef<HTMLDivElement, input>(function ({list
 })
 
 interface DataDropdown {
-    taskList:any;
-    dropdownList:any;
-    setTaskList: any;
-    setDropdownList:any
+    taskList: [{id:number, titel:string, description:string}] | [];
+    dropdownList:[{id:number, titel:string, description:string}] | [];
+    setTaskList: Function;
+    setDropdownList:Function;
+
 }
 
 export const DropdownForm = React.forwardRef<HTMLDivElement, DataDropdown>(function ({taskList, dropdownList, setTaskList, setDropdownList, ...props}, ref) {
         const refForm = useRef(null)
         const refButton = useRef(null)
-        
-
+ 
 
         function clickButton() {
             const form:any = refForm.current
@@ -80,10 +80,14 @@ export const DropdownForm = React.forwardRef<HTMLDivElement, DataDropdown>(funct
 
         function clickDropdown(e:any) {
             let id = Number(e.target.dataset.id)
-            console.log(dropdownList.filter((item:any) => item.id === id))
             setTaskList([...taskList, dropdownList.filter((item:any) => item.id === id)[0]])
-            setDropdownList(dropdownList.filter((item:any) => item.id !== id))    
-            }
+            setDropdownList(dropdownList.filter((item:any) => item.id !== id))
+            if(dropdownList.length === 0) {
+                const form:any = refForm.current
+                const button:any = refButton.current
+                form.style.display = "none"
+                button.classList.remove(styleButton.button__dropdown_active)
+            }}
 
 
 
