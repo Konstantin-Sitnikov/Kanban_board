@@ -21,10 +21,6 @@ export type User = {
 }
 
 
-export type Items = {
-    title?: string;
-    description?: string;
-}
 
 export type Task = {
     id?:number
@@ -33,19 +29,12 @@ export type Task = {
 }
 
 
-export type List = {
-    listName: string,
-    taskList: any,
-    data?:any,
-    setTaskList: any,    
-}
-
 
 export type TypeList = {
     listName: string,
-    taskList: any,
+    taskList: [{id:number, titel:string, description:string}] | [],
     setTaskList: Function, 
-    dropdownList?:any,
+    dropdownList?:[{id:number, titel:string, description:string}] | [],
     setDropdownList?: Function,
 }
 

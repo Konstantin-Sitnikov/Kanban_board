@@ -1,35 +1,61 @@
 import React, { FunctionComponent, ReactElement, useRef, useEffect, useState} from "react";
-import {Items, TypeList, DataTasks} from '../../types'
+import { TypeList, DataTasks} from '../../types'
 import { DropdownForm, InputForm} from '../Forms/forms'
-import { ButtonAddForm } from '../Button/button'
+import { Button } from '../Button/button'
 import { getTaskList } from '../LocalStorage/localstorage'
 import style from './style.module.scss'
 import styleButton from '../Button/style.module.scss'
-
-
-const TaskItems: FunctionComponent<Items> = ({title}): React.JSX.Element => {
-    return (
-        <li className={style.task__item}>{`${title}`}</li>
-    )
-}
 
 const TaskList: FunctionComponent<TypeList> = ({listName, taskList, setTaskList, dropdownList, setDropdownList}): React.JSX.Element => {
     
     const refForm = useRef<HTMLDivElement | null>(null)
     const refButton = useRef<HTMLButtonElement | null>(null)
+    const [disabledButton,  setDisabledButton] = useState<boolean>(false)
     
     let form: ReactElement | null = null
+
+    useEffect(()=>{
+
+
+            if((listName !=="backlog") && (dropdownList?.length === 0)) {
+                setDisabledButton(true)
+            } else { 
+                setDisabledButton(false)               
+               
+            }
+              
+        
+    }, [dropdownList])
+
+    useEffect(()=> {
+            const form: HTMLDivElement | null = refForm.current
+            const button: HTMLButtonElement | null = refButton.current
+            if (disabledButton){
+                 if(form && button) {
+                    form.style.display = "none"
+                    button.classList.remove(styleButton.button__addForm_active)
+                    console.log("yes")
+                    
+                }
+            }
+            }, 
+    [disabledButton])
+
+
+
     
-    function clickButton() {
-            const form: any = refForm.current
-            const button: any = refButton.current
-        if (!button.classList.contains(styleButton.button_active)) {
+    function clickButton():void {
+            const form: HTMLDivElement | null = refForm.current
+            const button: HTMLButtonElement | null = refButton.current
+        if(form && button) {
+            if (!button.classList.contains(styleButton.button__addForm_active)) {
             form.style.display = "flex"
-            button.classList.add(styleButton.button_active)
+            button.classList.add(styleButton.button__addForm_active)
         } else {
             form.style.display = "none"
-            button.classList.remove(styleButton.button_active) 
+            button.classList.remove(styleButton.button__addForm_active) 
         }
+        }    
     }
 
     if (listName === "backlog") {
@@ -45,7 +71,7 @@ const TaskList: FunctionComponent<TypeList> = ({listName, taskList, setTaskList,
             <ul className={style.task__list}>        
                 {
                     taskList.map((task:any) => {
-                        return (<TaskItems key={task.id} title={task.title}/>)
+                        return (<li key={task.id} className={style.task__item}>{`${task.title}`}</li>)
                     })
                 }  
             </ul>
@@ -54,7 +80,7 @@ const TaskList: FunctionComponent<TypeList> = ({listName, taskList, setTaskList,
                     form
                 }
                                 
-                <ButtonAddForm ref={refButton} onClick={clickButton}>Add card</ButtonAddForm>
+                <Button ref={refButton} disabled={disabledButton} className={styleButton.button__addForm} onClick={clickButton}>Add card</Button>
                                            
         </div>
       
@@ -69,6 +95,8 @@ const TaskList: FunctionComponent<TypeList> = ({listName, taskList, setTaskList,
     const [ready, setReady] = useState(getTaskList("ready"))
     const [progress, setProgress] = useState(getTaskList("progress"))
     const [finished, setFinished] = useState(getTaskList("finished"))
+
+  
 
     useEffect(()=>{
         localStorage.setItem("backlog", JSON.stringify(backlog))

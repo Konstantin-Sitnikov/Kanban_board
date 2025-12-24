@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect} from "react";
 import  style  from "./style.module.scss"
 import { getCountID } from '../LocalStorage/localstorage'
-import {ButtonSumbit, ButtonDropdown} from '../Button/button'
+import { Button, ButtonDropdown} from '../Button/button'
 import styleButton from '../Button/style.module.scss'
 
 interface input {
@@ -45,7 +45,7 @@ export const InputForm = React.forwardRef<HTMLDivElement, input>(function ({list
     return (
         <div className={style.input} ref={ref}>
             <input ref={refForm} value={valueForm} onChange={event => setValueForm(event.target.value)} className={style.input__form} type="text" placeholder="Введите задачу"  />
-            <ButtonSumbit ref={refButtonSumbit} onClick={clickButtonSumbit}>Submit</ButtonSumbit>
+            <Button ref={refButtonSumbit} className={styleButton.button__sumbit} onClick={clickButtonSumbit}>Submit</Button>
 
         </div>
     )
@@ -87,8 +87,8 @@ export const DropdownForm = React.forwardRef<HTMLDivElement, DataDropdown>(funct
 
 
 
-    return (<div ref={ref} className={style.form__dropdown}> 
-        <ButtonDropdown ref={refButton} onClick={clickButton}/>
+    return (<div ref={ref} className={style.form__dropdown}>
+        <Button ref={refButton} className={styleButton.button__dropdown} onClick={clickButton}></Button> 
         <ul ref={refForm} className={style.menu__dropdown}>
                     
                     {
