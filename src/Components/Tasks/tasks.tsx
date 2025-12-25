@@ -60,7 +60,9 @@ const TaskList: FunctionComponent<TypeList> = ({listName, taskList, setTaskList,
             <ul className={style.task__list}>        
                 {
                     taskList.map((task:any) => {
-                        return (<li key={task.id} className={style.task__item}><Link key={task.id} to={`/tasks/${task.id}`} className={style.task__link} state={{"listName":listName}}>{task.title}</Link></li>)
+                        return (<li key={task.id} className={style.task__item}>
+                                    <Link key={task.id} to={`/tasks/${task.id}`} className={style.task__link} state={{"listName":listName, "taskTitle": task.title, "taskDescription": task.description}}>{task.title}</Link>
+                                </li>)
                     })
                 }  
             </ul>
