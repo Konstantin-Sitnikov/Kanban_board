@@ -12,10 +12,19 @@
     display: flex;
     flex-direction: column;
     align-items: start;
+    gap: 35px;
 }
 
-.footer__text {
+.taskDetail__title {
+    font-family: 'Roboto';
+    font-size: 24px;
+}
+
+.taskDetail__description {
     font-family: 'Roboto';
     font-size: 18px;
+}
 
+.input {
+    display: none;
 }

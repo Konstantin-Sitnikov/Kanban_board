@@ -82,7 +82,7 @@ const TaskList: FunctionComponent<TypeList> = ({listName, taskList, setTaskList,
 
     const [backlog, setBacklog] = useState(getTaskList("backlog"))
     const [ready, setReady] = useState(getTaskList("ready"))
-    const [progress, setProgress] = useState(getTaskList("progress"))
+    const [progress, setProgress] = useState(getTaskList("In Progress"))
     const [finished, setFinished] = useState(getTaskList("finished"))
 
   
@@ -99,7 +99,7 @@ const TaskList: FunctionComponent<TypeList> = ({listName, taskList, setTaskList,
     
 
     useEffect(()=>{
-        localStorage.setItem("progress", JSON.stringify(progress))
+        localStorage.setItem("In Progress", JSON.stringify(progress))
     }, [progress])
 
     useEffect(()=>{
