@@ -63,3 +63,18 @@
     background-color: var.$task-item-hover-background-color;
     cursor: pointer;
 }
+
+
+
+.textAtraForm {
+    //display: none;
+    border: none;
+    width: 100%;
+    height: 100%;
+    border-radius: 0px 0px 5px 5px;
+    font-family: 'Roboto';
+    font-size: 18px;
+    resize: none;
+    box-sizing: border-box;
+
+}

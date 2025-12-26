@@ -1,61 +1,57 @@
-import React, { FunctionComponent, useRef, useState, useEffect, useCallback } from "react";
+import React, { FunctionComponent, useRef, useState, useEffect } from "react";
 import  style  from "./style.module.scss"
 import { useParams, useLocation } from 'react-router-dom'
+
 import { getTaskList } from '../LocalStorage/localstorage'
 
 
 const TaskDetail: FunctionComponent = (): React.JSX.Element => {
     const id = useParams()
+
     const lokation = useLocation()
     const refDescription = useRef(null)
     const refFormDescription = useRef(null)
     const [description, setDescription] = useState<string>(lokation.state.taskDescription)
-    const [valueForm, setValueForm] = useState<string>(lokation.state.taskDescription)
-    
-
-        function clickText() {
-            const text:any = refDescription.current
-            const input:any = refFormDescription.current
-            text.style.display = "none"
-            input.style.display = "flex"
-            input.focus()
-        }
-        function clickEnter(e:any) {
-            const text:any = refDescription.current
-            const input:any = refFormDescription.current
-            if(e.key ==="Enter"){
-                text.style.display = "flex"
-                input.style.display = "none"
-                setDescription(input.value)
-                setValueForm(input.value)
-            }
-        }
-        function clickEscape(e:any) {
-            const text:any = refDescription.current
-            const input:any = refFormDescription.current
-            if(e.key ==="Escape"){
-            text.style.display = "flex"
-            input.style.display = "none"
-
-            setValueForm(description)
-            console.log(input.value)
-            }
-        }
-
-
-
-
-
+    const tasklist = getTaskList(lokation.state.listName)
+ 
+  
     useEffect(()=>{
 
         const text:any = refDescription.current
         const input:any = refFormDescription.current
 
+        function clickText(e:any) {
+            text.style.display = "none"
+            input.style.display = "flex"
+            input.focus()
+            input.value = e.currentTarget.innerText
+          }
 
+        function clickEnter(e:any) {
+            if(e.key ==="Enter") {
+                text.style.display = "flex"
+                input.style.display = "none"
+                setDescription(input.value)
+                console.log(tasklist.filter((item:any) => item.id !== Number(id.taskId)))
+                localStorage.setItem(lokation.state.listName, JSON.stringify([...tasklist.filter((item:any) => item.id !== Number(id.taskId)), 
+                    {id:Number(id.taskId), title:lokation.state.taskTitle, description:input.value}]))
+            }
+        }
+        function clickEscape(e:any) {
+            if(e.key ==="Escape"){
+            text.style.display = "flex"
+            input.style.display = "none"
+            }
+        }
 
         text.addEventListener("click", clickText)
         input.addEventListener("keydown", clickEnter)
         input.addEventListener("keydown", clickEscape)
+        return () => {
+            text.removeEventListener("click", clickText)
+            input.removeEventListener("keydown", clickEnter)
+            input.removeEventListener("keydown", clickEscape)
+        }
     },[])
 
     
@@ -65,11 +61,8 @@ const TaskDetail: FunctionComponent = (): React.JSX.Element => {
         <div className={style.taskDetail}>
             <span className={style.taskDetail__title}>{lokation.state.taskTitle}</span>
             <span ref={refDescription} className={style.taskDetail__description}>{description}</span>
-            <textarea ref={refFormDescription} value={valueForm} onChange={event => setValueForm(event.target.value)} className={style.input} />
-            
+            <textarea ref={refFormDescription} className={style.input} />
         </div>
     )
 }
-
-
 export default TaskDetail

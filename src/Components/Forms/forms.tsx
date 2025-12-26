@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect} from "react";
+import React, { useRef, useState, useEffect } from "react";
 import  style  from "./style.module.scss"
 import { getCountID } from '../LocalStorage/localstorage'
 import { Button } from '../Button/button'
@@ -9,6 +9,7 @@ interface input {
     setTask: any;
 
 }
+
 
 export const InputForm = React.forwardRef<HTMLDivElement, input>(function ({list, setTask, ...props}, ref) {
     
