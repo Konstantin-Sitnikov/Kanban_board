@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useRef, useState, useEffect } from "react";
 import  style  from "./style.module.scss"
 import { useParams, useLocation } from 'react-router-dom'
-
+import { Link } from 'react-router-dom'
 import { getTaskList } from '../LocalStorage/localstorage'
 
 
@@ -14,6 +14,12 @@ const TaskDetail: FunctionComponent = (): React.JSX.Element => {
     const [description, setDescription] = useState<string>(lokation.state.taskDescription)
     const tasklist = getTaskList(lokation.state.listName)
  
+    function changeDescription (): void {
+        const tasklist = getTaskList(lokation.state.listName)
+        localStorage.setItem(lokation.state.listName, JSON.stringify([...tasklist.filter((item:any) => item.id !== Number(id.taskId)), 
+        {id:Number(id.taskId), title:lokation.state.taskTitle, description:description}]))
+
+    }
   
     useEffect(()=>{
 
@@ -32,9 +38,6 @@ const TaskDetail: FunctionComponent = (): React.JSX.Element => {
                 text.style.display = "flex"
                 input.style.display = "none"
                 setDescription(input.value)
-                console.log(tasklist.filter((item:any) => item.id !== Number(id.taskId)))
-                localStorage.setItem(lokation.state.listName, JSON.stringify([...tasklist.filter((item:any) => item.id !== Number(id.taskId)), 
-                    {id:Number(id.taskId), title:lokation.state.taskTitle, description:input.value}]))
             }
         }
         function clickEscape(e:any) {
@@ -62,6 +65,7 @@ const TaskDetail: FunctionComponent = (): React.JSX.Element => {
             <span className={style.taskDetail__title}>{lokation.state.taskTitle}</span>
             <span ref={refDescription} className={style.taskDetail__description}>{description}</span>
             <textarea ref={refFormDescription} className={style.input} />
+            <Link className={style.link} onClick={changeDescription} to="/"><hr className={style.line__horizontal}/> <hr className={style.line__vertical}/></Link>
         </div>
     )
 }
