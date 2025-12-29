@@ -12,3 +12,9 @@ body {
   font-family: 'Roboto'
 }
 
+@media (min-width: 0px) and (max-width: 413px) {
+
+    body {
+        width: 338px;
+    }
+}

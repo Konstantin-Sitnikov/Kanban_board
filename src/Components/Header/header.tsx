@@ -11,11 +11,11 @@ const Header: FunctionComponent<User> = ({avatar}): React.JSX.Element => {
   }
 
   const refDropdownMenu = useRef<HTMLUListElement | null>(null)
-  const refAvatar = useRef<HTMLDivElement | null>(null)
+  const refAvatar = useRef<HTMLSelectElement | null>(null)
 
   function clickAvatar() {
     const menu:HTMLUListElement | null = refDropdownMenu.current
-    const avatar:HTMLDivElement | null = refAvatar.current
+    const avatar:HTMLSelectElement | null = refAvatar.current
     if(menu && avatar) {
       console.log(menu.classList.contains(style.header__containerAvatar_active))
       if(!avatar.classList.contains(style.header__containerAvatar_active)) {
@@ -30,14 +30,18 @@ const Header: FunctionComponent<User> = ({avatar}): React.JSX.Element => {
   return (
     <div className={style.header}>
         <span className={style.header__logo}>Awesome Kanban Board</span>
-        <div ref={refAvatar} className={style.header__containerAvatar} onClick={clickAvatar}>
-            <img className={style.header__avatar} src={avatar} alt="avatar"></img>
-            <ul ref={refDropdownMenu} className={style.dropdownMenu}>
-              <div className={style.treangle}></div>
-              <li className={style.dropdownMenu__item}>Profile</li>
-              <li className={style.dropdownMenu__item}>Log Out</li>
-            </ul> 
-        </div>
+        <select ref={refAvatar} className={style.header__containerAvatar} >
+            <img className={style.header__avatar} src={avatar} onClick={clickAvatar} alt="avatar"></img>
+            <option value="">Profile</option>
+            <option value="">Log Out</option>  
+              
+              <ul ref={refDropdownMenu} className={style.dropdownMenu}>
+                  <div className={style.treangle}></div>
+                  <li className={style.dropdownMenu__item}>Profile</li>
+                  <li className={style.dropdownMenu__item}>Log Out</li>
+              </ul> 
+        </select>
+
     </div>
   );
 }

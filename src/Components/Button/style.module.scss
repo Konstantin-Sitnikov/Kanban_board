@@ -5,14 +5,21 @@
     height: 29px;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
+    &:hover {
+        cursor: pointer;
+    };
+    &:disabled {
+        cursor: default
+    }
 }
+
 
 .button__addForm {
     @include button();
     position: relative;
     background-color: button.$button__addForm-background-color
 }
+
 
 .button__addForm::before {
     content: "+";
