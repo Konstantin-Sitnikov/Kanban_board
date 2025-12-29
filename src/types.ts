@@ -4,14 +4,13 @@
 export type DataFooter = {
     name?:string;
     year?: number;
-    avatar?: any
     activeTasks: number;
     finishedTasks: number
 }
 
 export type DataMain = {
-    setActiveTasks: void;
-    setFinishedTasks: void
+    setActiveTasks: Function
+    setFinishedTasks: Function
 }
 
 export type User = {
@@ -44,3 +43,16 @@ export type DataTasks = {
     setFinishedTasks: Function,
 }
 
+
+export interface FormInput {
+    list:[{id:number, titel:string, description:string}] | [];
+    setTask: Function;
+}
+
+export interface DataDropdown {
+    taskList: [{id:number, titel:string, description:string}] | [];
+    dropdownList:[{id:number, titel:string, description:string}] | [];
+    setTaskList: Function;
+    setDropdownList:Function;
+
+}

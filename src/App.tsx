@@ -14,7 +14,7 @@ function App() {
   return (
     <>
       <Header avatar={testUser.avatar}/>
-      <Main activeTasks={activeTasks} setActiveTasks={setActiveTasks} finishedTasks={finishedTasks} setFinishedTasks={setFinishedTasks}/>
+      <Main setActiveTasks={setActiveTasks} setFinishedTasks={setFinishedTasks}/>
       <Footer name={testUser.name} year={testUser.year} activeTasks={activeTasks} finishedTasks={finishedTasks}/>
     </>
 

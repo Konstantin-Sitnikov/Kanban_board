@@ -1,4 +1,4 @@
-@use "../var.scss";
+@use "../Variables/tasks.scss";
 
 
 
@@ -45,7 +45,7 @@
     padding: 7px 9px 6px 8px;
     border: none;
     border-radius: 5px;
-    background-color: var.$task-item-background-color;
+    background-color: tasks.$task-item-background-color;
 }
 
 
@@ -55,12 +55,12 @@
     max-width: 100%;
     height: 42px;
     padding: 7px 9px 6px 8px;
-    background-color: var.$task-item-background-color;
+    background-color: tasks.$task-item-background-color;
     
 }
 
 .task__item_dropdown:hover{
-    background-color: var.$task-item-hover-background-color;
+    background-color: tasks.$task-item-hover-background-color;
     cursor: pointer;
 }
 

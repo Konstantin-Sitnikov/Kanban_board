@@ -12,7 +12,6 @@ const TaskDetail: FunctionComponent = (): React.JSX.Element => {
     const refDescription = useRef(null)
     const refFormDescription = useRef(null)
     const [description, setDescription] = useState<string>(lokation.state.taskDescription)
-    const tasklist = getTaskList(lokation.state.listName)
  
     function changeDescription (): void {
         const tasklist = getTaskList(lokation.state.listName)

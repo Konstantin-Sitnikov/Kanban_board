@@ -1,9 +1,9 @@
-@use "../var.scss";
+@use "../Variables/layout.scss";
 
 .header {
     width: 100%;
     height: 55px;
-    background-color: var.$header-background-color;
+    background-color: layout.$header-background-color;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -16,23 +16,79 @@
     display: flex;
     justify-content: start;
     align-items: center;
-    color: var.$header-text-color;
-    font-family: 'Roboto';
+    color: layout.$header-text-color;
     font-size: 28px;
 }
 
-.header__userMenu {
-    width: 64px;
+.header__containerAvatar {
+    width: 40px;
     height: 40px;
-    margin-right: 16px;
+    margin-right: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    cursor: pointer;
 }
+
+.header__containerAvatar_active {
+    cursor: pointer;
+}
+
+
+.header__containerAvatar::before {
+    content: ">";
+    transform: rotate(90deg);
+    position: absolute;
+    left: 50px;
+    color: #FFFFFF;
+}
+
+.header__containerAvatar_active::before {
+    transform: rotate(-90deg);
+}
+
 
 .header__avatar {
     width: 40px;
     height: 40px;
-    border: solid 0.8px var.$avatar-border-color;
+    border: solid 0.8px layout.$avatar-border-color;
     border-radius: 50%;
+
+}
+
+
+.dropdownMenu {
+    display: none;
+    position: absolute;
+    padding: 6px;
+    margin: 0;
+    top: 55px;
+    left: -80px;
+    width: 134px;
+    background-color: #FFFFFF;
+    z-index: 10;
+    border: none;
+    border-radius: 5px;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    gap: 3px;
+}
+
+.dropdownMenu__item {
+    list-style: none;
+    font-size: 14px;
+}
+
+
+.treangle {
+    position: absolute;
+    top: -5px;
+    left: 94px;
+    width: 11px;
+    height: 11px;
+    background-color: #FFFFFF;
+    z-index: 9;
+    transform: rotate(45deg);
 }

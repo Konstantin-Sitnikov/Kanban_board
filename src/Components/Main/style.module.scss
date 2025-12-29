@@ -1,10 +1,10 @@
-@use "../var.scss";
+@use "../Variables/layout.scss";
 
 .main {
     padding: 20px;
     width: 100%;
     height: 590px;
-    background-color: var.$main-background-color;
+    background-color: layout.$main-background-color;
     display: flex;
     justify-content: start;
     align-items: start;

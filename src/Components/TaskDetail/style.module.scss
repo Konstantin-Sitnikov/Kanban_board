@@ -1,14 +1,13 @@
-@use "../var.scss";
+@use "../Variables/tasks.scss";
 
 .taskDetail {
-    box-sizing: border-box;
     width: 1181px;
     height: 548px;
     position: absolute;
     top: 20px;
     left: 20px;
     padding: 30px;
-    background-color: #ffffff;
+    background-color: tasks.$task-detail-background-color;
     border: none;
     border-radius: 5px;
     display: flex;
@@ -18,14 +17,12 @@
 }
 
 .taskDetail__title {
-    font-family: 'Roboto';
     font-size: 24px;
 }
 
 .taskDetail__description {
     width: 100%;
     height: 100%;
-    font-family: 'Roboto';
     font-size: 18px;
     overflow-x: hidden;
     overflow-y: auto;
@@ -38,11 +35,8 @@
     width: 100%;
     height: 100%;
     border-radius: 0px 0px 5px 5px;
-    font-family: 'Roboto';
     font-size: 18px;
     resize: none;
-    box-sizing: border-box;
-
 }
 
 
