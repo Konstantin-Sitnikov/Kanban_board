@@ -17,8 +17,10 @@
 @media (min-width: 0px) and (max-width: 413px) {
 
     .main {
+        height: 1226px;
         flex-direction: column;
         overflow-y: auto;
+        scrollbar-width: none;
     }
 
 }

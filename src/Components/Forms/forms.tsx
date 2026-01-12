@@ -71,9 +71,9 @@ export const DropdownForm = React.forwardRef<HTMLDivElement, DataDropdown>(funct
         }
 
 
-        function clickDropdown(e:any) {
-            let id = Number(e.target.dataset.id)
-            setTaskList([...taskList, dropdownList.filter((item:any) => item.id === id)[0]])
+        function clickDropdown(id:any) {
+  
+            setTaskList([...taskList, dropdownList.filter((item:any) => item.id === Number(id))[0]])
             setDropdownList(dropdownList.filter((item:any) => item.id !== id))
             if(dropdownList.length === 0) {
                 const form: HTMLUListElement | null = refForm.current
@@ -91,7 +91,8 @@ export const DropdownForm = React.forwardRef<HTMLDivElement, DataDropdown>(funct
                     
                     {
                         dropdownList.map((task:any) => {
-                            return (<li key={task.id} data-id={task.id} onClick={(e) => {clickDropdown(e)}} className={style.task__item_dropdown}>{`${task.title}`}</li>)
+                            return (<li key={task.id} onClick={() => {clickDropdown(task.id)}} className={style.task__item_dropdown}>
+                                <span className={style.task__item_text}>{`${task.title}`}</span></li>)
                         })
                     }
         </ul>

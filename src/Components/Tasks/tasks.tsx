@@ -55,24 +55,28 @@ const TaskList: FunctionComponent<TypeList> = ({listName, taskList, setTaskList,
                     
 
     return (
-        <div  className={style.task}>
-            <span  className={style.task__titel}>{listName}</span>
-            <ul className={style.task__list}>        
-                {
-                    taskList.map((task:any) => {
-                        return (<li key={task.id} className={style.task__item}>
-                                    <Link key={task.id} to={`/tasks/${task.id}`} className={style.task__link} state={{"listName":listName, "taskTitle": task.title, "taskDescription": task.description}}>{task.title}</Link>
-                                </li>)
-                    })
-                }  
-            </ul>
 
-            {   
-                form
-            }
-                            
-            <Button ref={refButton} disabled={disabledButton} className={styleButton.button__addForm} onClick={clickButton}>Add card</Button>
-                                           
+        <div className={style.task}>
+            <span  className={style.task__titel}>{listName}</span>
+            <div  className={style.task__body}>
+                <ul className={style.task__list}>        
+                    {
+                        taskList.map((task:any) => {
+                            return (<li key={task.id} className={style.task__item}>
+                                        <Link key={task.id} to={`/tasks/${task.id}`} className={style.task__link} state={{"listName":listName, "taskTitle": task.title, "taskDescription": task.description}}>
+                                        <span className={style.test__text}>{task.title}</span></Link>
+                                    </li>)
+                        })
+                    }  
+                </ul>
+
+                {   
+                    form
+                }
+                                
+                <Button ref={refButton} disabled={disabledButton} className={styleButton.button__addForm} onClick={clickButton}>Add card</Button>
+                                            
+            </div>
         </div>
       
         )
