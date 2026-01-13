@@ -64,6 +64,7 @@ export const DropdownForm = React.forwardRef<HTMLDivElement, DataDropdown>(funct
             if (!button.classList.contains(styleButton.button__dropdown_active)) {
             form.style.display = "flex"
             button.classList.add(styleButton.button__dropdown_active)
+            form.scrollIntoView()
         } else {
             form.style.display = "none"
             button.classList.remove(styleButton.button__dropdown_active)

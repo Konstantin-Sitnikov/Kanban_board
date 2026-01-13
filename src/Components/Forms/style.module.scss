@@ -1,9 +1,5 @@
 @use "../Variables/tasks.scss";
 
-
-
-
-
 .form__dropdown {
     position: relative;
     width: 100%;
@@ -16,7 +12,7 @@
 
 .menu__dropdown {
     top: 25px;
-    width: 258px;
+    width: 100%;
     max-height: 100px;
     position: absolute;
     list-style: none;
@@ -27,7 +23,7 @@
     flex-direction: column;
     overflow-x: auto;
     scrollbar-width: none;
-    z-index: 2;
+    z-index: 30;
     
 }
 
@@ -36,6 +32,7 @@
 }
 
 .input {
+    width: 100%;
     display: none;
     position: relative;
 }

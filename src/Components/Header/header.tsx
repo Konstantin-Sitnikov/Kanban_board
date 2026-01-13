@@ -17,7 +17,6 @@ const Header: FunctionComponent<User> = ({avatar}): React.JSX.Element => {
     const menu:HTMLUListElement | null = refDropdownMenu.current
     const avatar:HTMLDivElement | null = refAvatar.current
     if(menu && avatar) {
-      console.log(menu.classList.contains(style.header__containerAvatar_active))
       if(!avatar.classList.contains(style.header__containerAvatar_active)) {
         avatar.classList.add(style.header__containerAvatar_active)
         menu.style.display = "flex"

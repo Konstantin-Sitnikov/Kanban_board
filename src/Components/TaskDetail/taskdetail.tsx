@@ -12,13 +12,17 @@ const TaskDetail: FunctionComponent = (): React.JSX.Element => {
     const refDescription = useRef(null)
     const refFormDescription = useRef(null)
     const [description, setDescription] = useState<string>(lokation.state.taskDescription)
+    const [save, setSave] = useState<boolean>(false)
  
-    function changeDescription (): void {
-        const tasklist = getTaskList(lokation.state.listName)
-        localStorage.setItem(lokation.state.listName, JSON.stringify([...tasklist.filter((item:any) => item.id !== Number(id.taskId)), 
-        {id:Number(id.taskId), title:lokation.state.taskTitle, description:description}]))
 
-    }
+    useEffect(()=>{
+        if(save) {
+            const tasklist = getTaskList(lokation.state.listName)
+            tasklist.splice(tasklist.indexOf(tasklist.filter((item:any) => item.id === Number(id.taskId))[0]), 1, {id:Number(id.taskId), title:lokation.state.taskTitle, description:description})
+            localStorage.setItem(lokation.state.listName, JSON.stringify(tasklist))
+        }
+
+    },[description])
   
     useEffect(()=>{
 
@@ -36,6 +40,7 @@ const TaskDetail: FunctionComponent = (): React.JSX.Element => {
             if(e.key ==="Enter") {
                 text.style.display = "flex"
                 input.style.display = "none"
+                setSave(true)
                 setDescription(input.value)
             }
         }
@@ -64,7 +69,7 @@ const TaskDetail: FunctionComponent = (): React.JSX.Element => {
             <span className={style.taskDetail__title}>{lokation.state.taskTitle}</span>
             <span ref={refDescription} className={style.taskDetail__description}>{description}</span>
             <textarea ref={refFormDescription} className={style.input} />
-            <Link className={style.link} onClick={changeDescription} to="/"><hr className={style.line__horizontal}/> <hr className={style.line__vertical}/></Link>
+            <Link className={style.link} to="/"><hr className={style.line__horizontal}/> <hr className={style.line__vertical}/></Link>
         </div>
     )
 }
